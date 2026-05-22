@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<script>
+  // Force reload if cached version is outdated
+  const VERSION = '20250521-v3';
+  if (localStorage.getItem('page_version') !== VERSION) {
+    localStorage.setItem('page_version', VERSION);
+    if (performance.navigation.type !== 1) {
+      window.location.reload(true);
+    }
+  }
+</script>
+<title>Passaporte Petland | Cuidado Premium para seu Pet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+<style>
+  /* === ISOLAMENTO WORDPRESS === */
+  #petland-lp { all: initial; font-family: 'Nunito', sans-serif; display: block; }
+  #petland-lp *, #petland-lp *::before, #petland-lp *::after { box-sizing: border-box; }
+  #petland-lp a { text-decoration: none; }
+  #petland-lp img { max-width: 100%; height: auto; }
+  #petland-lp p, #petland-lp h1, #petland-lp h2, #petland-lp h3, 
+  #petland-lp h4, #petland-lp h5, #petland-lp ul, #petland-lp li { 
+    margin: 0; padding: 0; 
+  }
+  /* ========================= */
+
+  :root {
+    --orange: #E05A0C;
+    --coral: #db6d45;
+    --orange-light: #f28050;
+    --orange-pale: #fdf0e8;
+    --black: #333434;
+    --cream: #f2e2d2;
+    --lime: #ccd259;
+    --lime-dark: #a8ae3a;
+    --white: #FFFFFF;
+    --text: #2b2b2b;
+    --muted: #7a6a60;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Nunito', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 16px 48px; background: var(--black); }
+  .nav-logo { font-size: 1.3rem; font-weight: 900; color: var(--white); letter-spacing: -0.01em; }
+  .nav-logo span { color: var(--orange); }
+  .nav-logo em { color: var(--lime); font-style: normal; }
+  .nav-cta { background: var(--orange); color: var(--white); padding: 11px 26px; border-radius: 100px; font-size: 0.85rem; font-weight: 800; text-decoration: none; transition: all 0.2s; }
+  .nav-cta:hover { background: var(--orange-light); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero { min-height: 100vh; background: var(--black); display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; padding-top: 72px; position: relative; overflow: hidden; }
+  .hero-left { padding: 80px 60px 80px 80px; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(224,90,12,0.18); border: 1px solid rgba(224,90,12,0.4); color: var(--orange-light); padding: 7px 18px; border-radius: 100px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 28px; width: fit-content; }
+  .hero h1 { font-size: clamp(2.6rem, 4.5vw, 4rem); font-weight: 900; color: var(--white); line-height: 1.08; margin-bottom: 24px; letter-spacing: -0.02em; }
+  .hero h1 .accent { color: var(--orange); }
+  .hero h1 .accent2 { color: var(--lime); }
+  .hero-sub { color: rgba(255,255,255,0.6); font-size: 1.05rem; line-height: 1.65; margin-bottom: 40px; max-width: 460px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary { background: var(--orange); color: var(--white); padding: 16px 32px; border-radius: 100px; font-size: 0.95rem; font-weight: 800; text-decoration: none; transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-primary:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(224,90,12,0.35); }
+  .btn-lime { background: var(--lime); color: var(--black); padding: 16px 28px; border-radius: 100px; font-size: 0.95rem; font-weight: 800; text-decoration: none; transition: all 0.25s; }
+  .btn-lime:hover { background: #d9df6b; transform: translateY(-2px); }
+
+  /* Hero right — foto real */
+  .hero-right { position: relative; overflow: hidden; }
+  .hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+  .hero-right-overlay { position: absolute; left: 0; top: 0; bottom: 0; width: 180px; background: linear-gradient(to right, var(--black), transparent); z-index: 2; }
+  .hero-illustration { display: none; }
+  .hero-tag { position: absolute; bottom: 32px; left: 48px; z-index: 3; display: inline-flex; align-items: center; gap: 6px; background: var(--orange); color: white; padding: 8px 18px; border-radius: 100px; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.04em; }
+
+  /* STRIP */
+  .strip { background: var(--orange); overflow: hidden; }
+  .strip-inner { display: flex; animation: scroll-strip 22s linear infinite; white-space: nowrap; }
+  .strip-item { display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px; font-size: 0.82rem; font-weight: 800; color: white; letter-spacing: 0.04em; text-transform: uppercase; flex-shrink: 0; }
+  .strip-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.5); }
+  @keyframes scroll-strip { 0%{transform:translateX(0)}100%{transform:translateX(-50%)} }
+
+  /* SECTIONS */
+  section { padding: 90px 48px; }
+  .container { max-width: 1140px; margin: 0 auto; }
+  .section-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--orange); font-weight: 800; margin-bottom: 10px; display: block; }
+  .section-title { font-size: clamp(1.9rem, 3vw, 2.8rem); color: var(--black); line-height: 1.1; margin-bottom: 14px; font-weight: 900; letter-spacing: -0.02em; }
+  .section-title .accent { color: var(--orange); }
+  .section-sub { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 560px; }
+
+  /* WHY */
+  .why { background: var(--cream); }
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 52px; }
+  .why-card { background: var(--white); border-radius: 22px; padding: 32px 26px; border: 2px solid transparent; transition: all 0.25s; position: relative; overflow: hidden; }
+  .why-card::before { content:''; position:absolute; bottom:0; left:0; right:0; height:4px; background:var(--orange); transform:scaleX(0); transform-origin:left; transition:transform 0.3s; }
+  .why-card:hover { border-color: rgba(224,90,12,0.15); transform: translateY(-4px); box-shadow: 0 14px 40px rgba(224,90,12,0.1); }
+  .why-card:hover::before { transform: scaleX(1); }
+  .why-icon { font-size: 2rem; margin-bottom: 16px; display: block; }
+  .why-card h4 { font-size: 0.95rem; font-weight: 800; color: var(--black); margin-bottom: 8px; }
+  .why-card p { color: var(--muted); font-size: 0.83rem; line-height: 1.6; }
+
+  /* PETS ilustrações */
+  .pets-section { background: var(--black); overflow: hidden; }
+  .pets-carousel-wrap { position: relative; }
+  .pets-grid {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    cursor: grab;
+  }
+  .pets-grid::-webkit-scrollbar { display: none; }
+  .pets-grid.dragging { cursor: grabbing; }
+  .pet-card {
+    position: relative;
+    overflow: hidden;
+    flex: 0 0 38vw;
+    height: 56vw;
+    max-height: 520px;
+    min-width: 280px;
+    scroll-snap-align: start;
+    display: flex; align-items: flex-end;
+  }
+  .pet-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.5s; }
+  .pet-card:hover img { transform: scale(1.05); }
+  .pet-card-bg { display: none; }
+  /* dots indicadores */
+  .carousel-dots { display: flex; justify-content: center; gap: 8px; padding: 18px 0 24px; }
+  .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.25); transition: all 0.25s; cursor: pointer; border: none; padding: 0; }
+  .carousel-dot.active { background: var(--orange); width: 24px; border-radius: 4px; }
+  /* setas */
+  .carousel-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    z-index: 10; width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+    color: white; font-size: 1.1rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; backdrop-filter: blur(6px);
+  }
+  .carousel-btn:hover { background: var(--orange); border-color: var(--orange); }
+  .carousel-btn.prev { left: 16px; }
+  .carousel-btn.next { right: 16px; }
+  @media(max-width:960px){
+    .pet-card { flex: 0 0 80vw; height: 100vw; max-height: 420px; }
+    .carousel-btn { display: none; }
+  }
+  .pet-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(51,52,52,0.92) 0%, rgba(51,52,52,0.1) 60%, transparent 100%); }
+  .pet-card-content { position: relative; z-index: 2; padding: 24px; width: 100%; }
+  .pet-card-content span { background: var(--orange); color: white; padding: 5px 14px; border-radius: 100px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; display: inline-block; margin-bottom: 8px; }
+  .pet-card-content p { color: white; font-size: 0.95rem; font-weight: 700; line-height: 1.3; }
+  .pet-card-1 { background: linear-gradient(135deg, #2d1f10 0%, #1a1108 100%); }
+  .pet-card-2 { background: linear-gradient(135deg, #1a2510 0%, #0f1a08 100%); }
+  .pet-card-3 { background: linear-gradient(135deg, #10182d 0%, #080f1a 100%); }
+
+  /* PASSAPORTES */
+  .passaportes { background: var(--orange-pale); }
+  .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 52px; }
+  .pass-card { border-radius: 28px; padding: 36px 30px; position: relative; overflow: hidden; display: flex; flex-direction: column; background: var(--white); border: 2px solid rgba(224,90,12,0.1); transition: all 0.25s; }
+  .pass-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(224,90,12,0.12); border-color: rgba(224,90,12,0.25); }
+  .pass-card.featured { background: var(--black); border-color: var(--orange); }
+  .pass-card.featured .pass-name { color: var(--white); }
+  .pass-card.featured .pass-tagline { color: rgba(255,255,255,0.5); }
+  .pass-card.featured .pass-items li { border-color: rgba(255,255,255,0.07); }
+  .pass-card.featured .item-name { color: var(--white); }
+  .pass-card.featured .item-val { color: rgba(255,255,255,0.3); }
+  .pass-card.featured .pass-pricing { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); }
+  .pass-card.featured .price-original { color: rgba(255,255,255,0.35); }
+  .pass-card.featured .price-main { color: var(--white); }
+  .pass-card.featured .price-parcel { color: rgba(255,255,255,0.45); }
+
+  .pass-tier { display: inline-flex; align-items: center; gap: 6px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-bottom: 20px; width: fit-content; }
+  .tier-bronze { background: rgba(139,94,60,0.12); color: #8B5E3C; border: 1px solid rgba(139,94,60,0.3); }
+  .tier-silver { background: rgba(107,114,128,0.1); color: #4B5563; border: 1px solid rgba(107,114,128,0.25); }
+  .tier-silver-feat { background: rgba(224,90,12,0.2); color: var(--orange-light); border: 1px solid rgba(224,90,12,0.4); }
+  .tier-gold { background: rgba(224,90,12,0.12); color: var(--orange); border: 1px solid rgba(224,90,12,0.3); }
+
+  .pass-name { font-size: 1.3rem; font-weight: 900; color: var(--black); margin-bottom: 6px; line-height: 1.15; letter-spacing: -0.01em; }
+  .pass-tagline { color: var(--muted); font-size: 0.82rem; margin-bottom: 24px; line-height: 1.5; }
+  .pass-items { list-style: none; display: flex; flex-direction: column; margin-bottom: 28px; flex: 1; }
+  .pass-items li { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; font-size: 0.8rem; line-height: 1.4; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+  .pass-items li:last-child { border-bottom: none; }
+  .item-name { color: var(--text); display: flex; align-items: flex-start; gap: 6px; font-weight: 600; }
+  .item-val { color: #9CA3AF; font-size: 0.72rem; white-space: nowrap; }
+  .pass-pricing { background: var(--orange-pale); border-radius: 14px; padding: 18px 20px; margin-bottom: 20px; border: 1px solid rgba(224,90,12,0.1); }
+  .price-original { font-size: 0.75rem; color: #9CA3AF; text-decoration: line-through; margin-bottom: 4px; }
+  .price-main { font-size: 2rem; font-weight: 900; color: var(--black); line-height: 1; margin-bottom: 4px; letter-spacing: -0.02em; }
+  .price-main .currency { font-size: 1rem; font-weight: 700; color: var(--orange); }
+  .price-parcel { color: var(--muted); font-size: 0.75rem; margin-bottom: 10px; }
+  .price-savings { display: inline-flex; align-items: center; font-size: 0.72rem; font-weight: 800; padding: 4px 12px; border-radius: 100px; background: rgba(204,210,89,0.2); color: var(--lime-dark); }
+  .pass-cta { display: block; text-align: center; padding: 14px; border-radius: 14px; font-size: 0.88rem; font-weight: 800; text-decoration: none; transition: all 0.25s; background: var(--orange); color: var(--white); }
+  .pass-cta:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(224,90,12,0.3); }
+  .featured .pass-cta { background: var(--lime); color: var(--black); }
+  .featured .pass-cta:hover { background: #d9df6b; }
+  .badge-popular { position: absolute; top: 20px; right: 20px; background: var(--orange); color: white; font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; padding: 5px 12px; border-radius: 100px; }
+
+  /* COMO FUNCIONA */
+  .como { background: var(--white); }
+  .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 52px; position: relative; }
+  .steps-grid::before { content:''; position:absolute; top: 36px; left: 10%; right: 10%; height: 2px; background: repeating-linear-gradient(to right, var(--orange) 0, var(--orange) 8px, transparent 8px, transparent 18px); z-index: 0; }
+  .step { text-align: center; position: relative; z-index: 1; }
+  .step-num { width: 72px; height: 72px; border-radius: 50%; background: var(--orange); color: white; font-size: 1.5rem; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 4px solid var(--cream); }
+  .step h4 { font-size: 0.9rem; font-weight: 800; color: var(--black); margin-bottom: 8px; }
+  .step p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+  /* SERVICOS */
+  .services { background: var(--cream); }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 52px; }
+  .service-card { background: var(--white); border-radius: 20px; padding: 28px; display: flex; gap: 16px; align-items: flex-start; transition: all 0.25s; }
+  .service-card:hover { background: var(--orange-pale); transform: translateY(-3px); }
+  .service-icon { font-size: 1.5rem; flex-shrink: 0; width: 50px; height: 50px; background: var(--cream); border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+  .service-card h4 { font-size: 0.9rem; font-weight: 800; color: var(--black); margin-bottom: 6px; }
+  .service-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+  /* CTA STRIP */
+  .cta-strip { background: var(--orange); padding: 80px 48px; text-align: center; position: relative; overflow: hidden; }
+  .cta-strip::before { content:''; position:absolute; width:600px; height:600px; border-radius:50%; background:rgba(255,255,255,0.06); top:-200px; right:-100px; }
+  .cta-strip::after { content:''; position:absolute; width:400px; height:400px; border-radius:50%; background:rgba(255,255,255,0.05); bottom:-150px; left:-100px; }
+  .cta-strip h2 { font-size: clamp(1.8rem, 3vw, 2.8rem); color: white; font-weight: 900; margin-bottom: 14px; line-height: 1.15; letter-spacing: -0.02em; position: relative; z-index: 1; }
+  .cta-strip p { color: rgba(255,255,255,0.8); font-size: 1.05rem; margin-bottom: 38px; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.65; position: relative; z-index: 1; }
+  .btn-wa { background: white; color: var(--orange); padding: 18px 38px; border-radius: 100px; font-size: 1rem; font-weight: 900; text-decoration: none; transition: all 0.25s; display: inline-flex; align-items: center; gap: 10px; position: relative; z-index: 1; }
+  .btn-wa:hover { background: var(--cream); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+
+  /* CONTACT */
+  .contact { background: var(--cream); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 52px; }
+  .contact-items { display: flex; flex-direction: column; gap: 16px; }
+  .contact-item { display: flex; align-items: flex-start; gap: 16px; background: var(--white); border-radius: 18px; padding: 22px; border: 2px solid transparent; transition: all 0.2s; }
+  .contact-item:hover { border-color: rgba(224,90,12,0.2); }
+  .contact-icon { width: 44px; height: 44px; background: var(--orange); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .contact-item h5 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 800; margin-bottom: 4px; }
+  .contact-item p { font-size: 0.92rem; color: var(--text); font-weight: 700; }
+  .map-wrap { border-radius: 22px; overflow: hidden; height: 340px; border: 2px solid rgba(224,90,12,0.1); }
+  .map-wrap iframe { width: 100%; height: 100%; border: none; }
+
+  footer { background: var(--black); padding: 36px 48px; text-align: center; }
+  footer p { color: rgba(255,255,255,0.25); font-size: 0.78rem; }
+  footer a { color: var(--orange); text-decoration: none; }
+
+  .wa-float { position: fixed; bottom: 28px; right: 28px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.4); z-index: 200; transition: all 0.25s; animation: pulse-wa 3s infinite; }
+  .wa-float:hover { transform: scale(1.1); }
+  @keyframes pulse-wa { 0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.4)}50%{box-shadow:0 4px 36px rgba(37,211,102,0.65)} }
+
+  @media(max-width:960px){
+    .hero{grid-template-columns:1fr;}.hero-right{height:320px;padding-top:0;}
+    .hero-left{padding:40px 24px 40px;}
+    nav{padding:14px 16px;}
+    .nav-cta{padding:9px 14px; font-size:0.78rem; white-space:nowrap;}
+    .why-grid,.cards-grid,.services-grid,.steps-grid{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    section{padding:60px 24px;}
+    .cta-strip{padding:60px 24px;}
+    footer{padding:28px 20px;}
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .hero-badge{animation:fadeUp .5s ease both}
+  .hero h1{animation:fadeUp .5s .1s ease both}
+  .hero-sub{animation:fadeUp .5s .2s ease both}
+  .hero-actions{animation:fadeUp .5s .3s ease both}
+</style>
+</head>
+<body>
+<div id="petland-lp">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Pet<span>land</span> <em>Av. Brasil</em></div>
+  <a href="https://api.whatsapp.com/send?phone=5519994021876&text=Olá,%20quero%20conhecer%20os%20Passaportes%20Petland!" class="nav-cta" target="_blank">Falar no WhatsApp</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">🐾 Campinas · Av. Brasil, 119</div>
+    <h1>Seu pet merece<br>o <span class="accent">melhor</span><br>o ano <span class="accent2">todo.</span></h1>
+    <p class="hero-sub">Conheça os Passaportes Petland: três planos completos com banho, tosa, higiene, petiscos e experiências exclusivas, com economia real de até R$ 1.735.</p>
+    <div class="hero-actions">
+      <a href="#passaportes" class="btn-primary" onclick="event.preventDefault();document.getElementById('como').scrollIntoView({behavior:'smooth'})">Ver os Passaportes 🐾</a>
+      <a href="https://api.whatsapp.com/send?phone=5519994021876&text=Olá,%20quero%20conhecer%20os%20Passaportes%20Petland!" class="btn-lime" target="_blank">Falar no WhatsApp</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=900&q=85&fit=crop&crop=center" alt="Cachorro feliz no petshop" loading="eager">
+    <div class="hero-right-overlay"></div>
+    <div class="hero-tag">🐶 Cuidado que faz diferença</div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-inner">
+    <span class="strip-item">🛁 Banho Premium <span class="strip-dot"></span></span>
+    <span class="strip-item">✂️ Tosa Profissional <span class="strip-dot"></span></span>
+    <span class="strip-item">🎥 100% Monitorado <span class="strip-dot"></span></span>
+    <span class="strip-item">🩺 Vet Responsável <span class="strip-dot"></span></span>
+    <span class="strip-item">🌡️ Temperatura Controlada <span class="strip-dot"></span></span>
+    <span class="strip-item">✨ Pet Society <span class="strip-dot"></span></span>
+    <span class="strip-item">🏆 51 Anos de Tradição <span class="strip-dot"></span></span>
+    <span class="strip-item">🐾 Campinas, SP <span class="strip-dot"></span></span>
+    <span class="strip-item">🛁 Banho Premium <span class="strip-dot"></span></span>
+    <span class="strip-item">✂️ Tosa Profissional <span class="strip-dot"></span></span>
+    <span class="strip-item">🎥 100% Monitorado <span class="strip-dot"></span></span>
+    <span class="strip-item">🩺 Vet Responsável <span class="strip-dot"></span></span>
+    <span class="strip-item">🌡️ Temperatura Controlada <span class="strip-dot"></span></span>
+    <span class="strip-item">✨ Pet Society <span class="strip-dot"></span></span>
+    <span class="strip-item">🏆 51 Anos de Tradição <span class="strip-dot"></span></span>
+    <span class="strip-item">🐾 Campinas, SP <span class="strip-dot"></span></span>
+  </div>
+</div>
+
+<!-- POR QUE -->
+<section class="why">
+  <div class="container">
+    <div style="max-width:600px;">
+      <span class="section-label">Por que a Petland</span>
+      <h2 class="section-title">Mais do que banho e tosa.<br>É cuidado de <span class="accent">verdade.</span></h2>
+      <p class="section-sub">Cada detalhe foi pensado para que seu pet tenha uma experiência segura, confortável e cheia de carinho a cada visita.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card"><span class="why-icon">🎥</span><h4>Monitorado por câmeras</h4><p>Transparência total. Você sabe que seu pet está seguro em cada momento do atendimento.</p></div>
+      <div class="why-card"><span class="why-icon">🌡️</span><h4>Temperatura controlada</h4><p>A água do banho é controlada eletronicamente para garantir conforto real, não desconforto disfarçado de cuidado.</p></div>
+      <div class="why-card"><span class="why-icon">🩺</span><h4>Veterinário responsável</h4><p>Cada banho é supervisionado por médicos veterinários experientes que amam animais tanto quanto você.</p></div>
+      <div class="why-card"><span class="why-icon">✨</span><h4>Produtos Pet Society</h4><p>Ingredientes selecionados para mimar a pele e pelo do seu pet, com resultados que duram mais.</p></div>
+      <div class="why-card"><span class="why-icon">📋</span><h4>Check-list de segurança</h4><p>Cada animal é avaliado antes de qualquer procedimento. Sem surpresas, sem riscos.</p></div>
+      <div class="why-card"><span class="why-icon">🏆</span><h4>51 anos de tradição</h4><p>Uma rede com padrão internacional de cuidado que inspira confiança no mundo inteiro.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CARROSSEL DE FOTOS -->
+<div class="pets-section">
+  <div class="pets-carousel-wrap">
+    <button class="carousel-btn prev" onclick="slideCarousel(-1)">&#8592;</button>
+    <div class="pets-grid" id="petsCarousel">
+      <div class="pet-card">
+        <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=700&q=85&fit=crop&crop=center" alt="Cachorro no banho">
+        <div class="pet-card-overlay"></div>
+        <div class="pet-card-content">
+          <span>Banho Premium</span>
+          <p>Cuidado e carinho em cada detalhe</p>
+        </div>
+      </div>
+      <div class="pet-card">
+        <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=700&q=85&fit=crop&crop=face" alt="Cachorro feliz">
+        <div class="pet-card-overlay"></div>
+        <div class="pet-card-content">
+          <span>Passaportes Petland</span>
+          <p>O ano todo de cuidado garantido</p>
+        </div>
+      </div>
+      <div class="pet-card">
+        <img src="https://images.unsplash.com/photo-1601979031925-424e53b6caaa?w=700&q=85&fit=crop&crop=face" alt="Tutor com cachorro">
+        <div class="pet-card-overlay"></div>
+        <div class="pet-card-content">
+          <span>Tutores Felizes</span>
+          <p>Porque quem ama cuida bem</p>
+        </div>
+      </div>
+      <div class="pet-card">
+        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=700&q=85&fit=crop&crop=center" alt="Cachorros brincando">
+        <div class="pet-card-overlay"></div>
+        <div class="pet-card-content">
+          <span>Experiência Exclusiva</span>
+          <p>Momentos especiais a cada visita</p>
+        </div>
+      </div>
+      <div class="pet-card">
+        <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=700&q=85&fit=crop&crop=center" alt="Cachorro golden retriever">
+        <div class="pet-card-overlay"></div>
+        <div class="pet-card-content">
+          <span>Pets Felizes</span>
+          <p>Saem renovados a cada visita</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-btn next" onclick="slideCarousel(1)">&#8594;</button>
+    <div class="carousel-dots" id="carouselDots"></div>
+  </div>
+</div>
+
+<script>
+  const carousel = document.getElementById('petsCarousel');
+  const dotsContainer = document.getElementById('carouselDots');
+  const cards = carousel.querySelectorAll('.pet-card');
+  let currentIndex = 0;
+
+  // Criar dots
+  cards.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goTo(i);
+    dotsContainer.appendChild(dot);
+  });
+
+  function updateDots() {
+    dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === currentIndex);
+    });
+  }
+
+  function goTo(index) {
+    currentIndex = Math.max(0, Math.min(index, cards.length - 1));
+    carousel.scrollTo({ left: cards[currentIndex].offsetLeft, behavior: 'smooth' });
+    updateDots();
+  }
+
+  function slideCarousel(dir) {
+    goTo(currentIndex + dir);
+  }
+
+  // Atualizar dot ao scrollar manualmente
+  carousel.addEventListener('scroll', () => {
+    const scrollLeft = carousel.scrollLeft;
+    let closest = 0;
+    cards.forEach((card, i) => {
+      if (Math.abs(card.offsetLeft - scrollLeft) < Math.abs(cards[closest].offsetLeft - scrollLeft)) {
+        closest = i;
+      }
+    });
+    if (closest !== currentIndex) {
+      currentIndex = closest;
+      updateDots();
+    }
+  });
+
+  // Drag para desktop
+  let isDown = false, startX, scrollLeftStart;
+  carousel.addEventListener('mousedown', e => { isDown = true; carousel.classList.add('dragging'); startX = e.pageX - carousel.offsetLeft; scrollLeftStart = carousel.scrollLeft; });
+  carousel.addEventListener('mouseleave', () => { isDown = false; carousel.classList.remove('dragging'); });
+  carousel.addEventListener('mouseup', () => { isDown = false; carousel.classList.remove('dragging'); });
+  carousel.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - carousel.offsetLeft;
+    carousel.scrollLeft = scrollLeftStart - (x - startX) * 1.5;
+  });
+</script>
+
+<!-- COMO FUNCIONA -->
+<section class="como" id="como">
+  <div class="container">
+    <div style="text-align:center; max-width:620px; margin:0 auto;">
+      <span class="section-label">Como funciona</span>
+      <h2 class="section-title" style="text-align:center;">Simples assim para <span class="accent">começar.</span></h2>
+      <p class="section-sub" style="margin:0 auto; text-align:center;">Em poucos passos seu pet já tem cuidado garantido o ano todo.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Escolha seu Passaporte</h4>
+        <p>Três opções para cada perfil. Do plano de entrada ao mais completo, tem um ideal para você.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Fale com a gente</h4>
+        <p>Entre em contato pelo WhatsApp. Nossa equipe tira todas as dúvidas e confirma seu plano.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Agende a primeira visita</h4>
+        <p>Com o Passaporte ativo, você agenda pelo WhatsApp com prioridade e sem estresse.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Aproveite o ano todo</h4>
+        <p>Sem surpresas no bolso. Tudo já garantido para o seu pet ser feliz e bem cuidado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PASSAPORTES -->
+<section class="passaportes" id="passaportes">
+  <div class="container">
+    <div style="text-align:center; max-width:640px; margin:0 auto;">
+      <span class="section-label">Passaportes Petland</span>
+      <h2 class="section-title" style="text-align:center;">Escolha o plano ideal<br>para o seu <span class="accent">companheiro.</span></h2>
+      <p class="section-sub" style="margin:0 auto; text-align:center;">Três planos completos com tudo que seu pet precisa durante o ano — com economia real e sem surpresas no bolso.</p>
+    </div>
+    <div class="cards-grid">
+
+      <!-- BRONZE -->
+      <div class="pass-card">
+        <div class="pass-tier tier-bronze">🥉 Mundo Encantado</div>
+        <div class="pass-name">Passaporte<br>Mundo Encantado</div>
+        <p class="pass-tagline">A porta de entrada para uma experiência leve, divertida e cheia de carinho.</p>
+        <ul class="pass-items">
+          <li><span class="item-name">🛁 4 banhos premium</span><span class="item-val">4x R$75</span></li>
+          <li><span class="item-name">✂️ 4 tosas higiênicas</span><span class="item-val">4x R$30</span></li>
+          <li><span class="item-name">🦷 Escovação dental</span><span class="item-val">4x R$8</span></li>
+          <li><span class="item-name">🐾 Hidratação patinhas</span><span class="item-val">4x R$8</span></li>
+          <li><span class="item-name">🍖 Petisco especial</span><span class="item-val">4x R$30</span></li>
+          <li><span class="item-name">🎀 Acessório temático</span><span class="item-val">R$40</span></li>
+          <li><span class="item-name">🧘 Anti-estresse</span><span class="item-val">R$40</span></li>
+          <li><span class="item-name">🎁 1 dia especial</span><span class="item-val">R$50</span></li>
+        </ul>
+        <div class="pass-pricing">
+          <div class="price-original">Valor total: R$ 734,00</div>
+          <div class="price-main"><span class="currency">R$</span> 397<small style="font-size:1rem;">,00</small></div>
+          <div class="price-parcel">ou 6x de R$ 76,00</div>
+          <span class="price-savings">🌿 Economia de R$ 337,00</span>
+        </div>
+        <a href="https://api.whatsapp.com/send?phone=5519994021876&text=Olá!%20Quero%20o%20Passaporte%20Mundo%20Encantado!" class="pass-cta" target="_blank">Quero esse Passaporte →</a>
+      </div>
+
+      <!-- SILVER FEATURED -->
+      <div class="pass-card featured">
+        <span class="badge-popular">⭐ Mais popular</span>
+        <div class="pass-tier tier-silver-feat">🥈 Reino da Diversão</div>
+        <div class="pass-name">Passaporte<br>Reino da Diversão</div>
+        <p class="pass-tagline">O equilíbrio perfeito entre cuidado completo e custo-benefício.</p>
+        <ul class="pass-items">
+          <li><span class="item-name">🛁 8 banhos premium</span><span class="item-val">8x R$75</span></li>
+          <li><span class="item-name">✂️ 6 tosas higiênicas</span><span class="item-val">6x R$30</span></li>
+          <li><span class="item-name">🦷 Escovação dental</span><span class="item-val">8x R$8</span></li>
+          <li><span class="item-name">🐾 Hidratação patinhas</span><span class="item-val">8x R$8</span></li>
+          <li><span class="item-name">💨 2 banhos de ozônio</span><span class="item-val">2x R$15</span></li>
+          <li><span class="item-name">🍖 Petisco especial</span><span class="item-val">8x R$30</span></li>
+          <li><span class="item-name">🎀 Acessórios exclusivos</span><span class="item-val">R$80</span></li>
+          <li><span class="item-name">🧸 1 brinquedo especial</span><span class="item-val">R$60</span></li>
+          <li><span class="item-name">🧘 Anti-estresse</span><span class="item-val">R$80</span></li>
+          <li><span class="item-name">🎁 2 dias especiais</span><span class="item-val">R$100</span></li>
+          <li><span class="item-name">📸 2 fotos especiais</span><span class="item-val">R$40</span></li>
+        </ul>
+        <div class="pass-pricing">
+          <div class="price-original">Valor total: R$ 1.461,00</div>
+          <div class="price-main"><span class="currency">R$</span> 697<small style="font-size:1rem;">,00</small></div>
+          <div class="price-parcel">ou 12x de R$ 69,90</div>
+          <span class="price-savings">🌿 Economia de R$ 764,00</span>
+        </div>
+        <a href="https://api.whatsapp.com/send?phone=5519994021876&text=Olá!%20Quero%20o%20Passaporte%20Reino%20da%20Diversão!" class="pass-cta" target="_blank">Quero esse Passaporte →</a>
+      </div>
+
+      <!-- GOLD -->
+      <div class="pass-card">
+        <div class="pass-tier tier-gold">🥇 Experiência Real</div>
+        <div class="pass-name">Passaporte<br>Experiência Real</div>
+        <p class="pass-tagline">O nível mais completo: cuidado, bem-estar e experiências exclusivas o ano todo.</p>
+        <ul class="pass-items">
+          <li><span class="item-name">🛁 12 banhos premium</span><span class="item-val">12x R$75</span></li>
+          <li><span class="item-name">✂️ 10 tosas higiênicas</span><span class="item-val">10x R$30</span></li>
+          <li><span class="item-name">🦷 Escovação dental</span><span class="item-val">12x R$8</span></li>
+          <li><span class="item-name">🐾 Hidratação patinhas</span><span class="item-val">12x R$8</span></li>
+          <li><span class="item-name">💨 4 banhos de ozônio</span><span class="item-val">4x R$15</span></li>
+          <li><span class="item-name">💎 2 hidratações luxo</span><span class="item-val">2x R$50</span></li>
+          <li><span class="item-name">🍖 Petisco especial</span><span class="item-val">12x R$30</span></li>
+          <li><span class="item-name">🎀 Acessórios exclusivos</span><span class="item-val">R$120</span></li>
+          <li><span class="item-name">🧸 2 brinquedos especiais</span><span class="item-val">R$120</span></li>
+          <li><span class="item-name">🧘 Sessões anti-estresse</span><span class="item-val">R$120</span></li>
+          <li><span class="item-name">🎁 3 dias especiais</span><span class="item-val">R$150</span></li>
+          <li><span class="item-name">🐕 2 passeios assistidos</span><span class="item-val">R$100</span></li>
+          <li><span class="item-name">📸 4 fotos especiais</span><span class="item-val">R$80</span></li>
+          <li><span class="item-name">📝 Relatório de bem-estar</span><span class="item-val">R$50</span></li>
+          <li><span class="item-name">🎖️ Prioridade de agenda</span><span class="item-val">R$80</span></li>
+        </ul>
+        <div class="pass-pricing">
+          <div class="price-original">Valor total: R$ 2.732,00</div>
+          <div class="price-main"><span class="currency">R$</span> 997<small style="font-size:1rem;">,00</small></div>
+          <div class="price-parcel">ou 12x de R$ 99,70</div>
+          <span class="price-savings">🌿 Economia de R$ 1.735,00</span>
+        </div>
+        <a href="https://api.whatsapp.com/send?phone=5519994021876&text=Olá!%20Quero%20o%20Passaporte%20Experiência%20Real!" class="pass-cta" target="_blank">Quero esse Passaporte →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SERVICOS -->
+<section class="services">
+  <div class="container">
+    <span class="section-label">Nossos serviços</span>
+    <h2 class="section-title">Tudo que o seu pet<br>precisa e <span class="accent">merece.</span></h2>
+    <p class="section-sub">Do banho mais simples ao cuidado mais especializado, nossa estrutura foi pensada para entregar o melhor em cada visita.</p>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-icon">🛁</div><div><h4>Banhos Revigorantes e Terapêuticos</h4><p>Banho personalizado, detox e terapêutico com produtos Pet Society, adaptados ao pelo único do seu pet.</p></div></div>
+      <div class="service-card"><div class="service-icon">🌬️</div><div><h4>Cuidados com a Pelagem</h4><p>Remoção de subpelo, desembolo e hidratação profunda para aparência, higiene e conforto térmico.</p></div></div>
+      <div class="service-card"><div class="service-icon">💇</div><div><h4>Tosas Personalizadas</h4><p>Higiênica, de raça, máquina, tesoura e Trimming. Seu pet sempre no melhor visual.</p></div></div>
+      <div class="service-card"><div class="service-icon">🦷</div><div><h4>Saúde Completa</h4><p>Escovação dental e corte de unhas para manter seu pet saudável nos detalhes que mais importam.</p></div></div>
+      <div class="service-card"><div class="service-icon">🎨</div><div><h4>Tonalização e Estilização</h4><p>Tonalização segura e divertida ou estilização completa com penteado exclusivo para brilhar.</p></div></div>
+      <div class="service-card"><div class="service-icon">🧴</div><div><h4>Serviço X-treme</h4><p>Para pets com excesso de sujidade ou antes de tosas especiais. Cuidado extra quando precisa.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <h2>Seu pet merece o ano inteiro<br>de cuidado de verdade.</h2>
+  <p>Escolha o Passaporte Petland e esqueça a preocupação de agendar avulso. Tudo resolvido de uma vez, com economia real de até R$ 1.735.</p>
+  <a href="https://api.whatsapp.com/send?phone=5519994021876&text=Olá!%20Quero%20conhecer%20os%20Passaportes%20Petland!" class="btn-wa" target="_blank">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Falar no WhatsApp agora
+  </a>
+</div>
+
+<!-- CONTATO -->
+<section class="contact">
+  <div class="container">
+    <span class="section-label">Onde estamos</span>
+    <h2 class="section-title">Venha nos <span class="accent">visitar.</span></h2>
+    <div class="contact-grid">
+      <div class="contact-items">
+        <div class="contact-item"><div class="contact-icon">📞</div><div><h5>WhatsApp</h5><p>(19) 99402-1876</p></div></div>
+        <div class="contact-item"><div class="contact-icon">📟</div><div><h5>Telefone fixo</h5><p>(19) 3325-0907</p></div></div>
+        <div class="contact-item"><div class="contact-icon">📍</div><div><h5>Endereço</h5><p>Av. Brasil, 119 — Campinas, SP</p></div></div>
+        <div class="contact-item"><div class="contact-icon">🕐</div><div><h5>Horário</h5><p>Segunda a sábado: 9h às 18h</p></div></div>
+      </div>
+      <div class="map-wrap">
+        <iframe src="https://maps.google.com/maps?q=Petland+Avenida+Brasil,+119,+Campinas,+SP&t=m&z=15&output=embed&iwloc=near" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Petland Avenida Brasil — Campinas, SP — <a href="https://petlandavbrasil.com.br" target="_blank">petlandavbrasil.com.br</a></p>
+</footer>
+
+<a href="https://api.whatsapp.com/send?phone=5519994021876&text=Olá!%20Quero%20conhecer%20os%20Passaportes%20Petland!" class="wa-float" target="_blank">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+</div>
+</body>
+</html>
